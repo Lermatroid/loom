@@ -1,0 +1,34 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1709324161120,
+      "tag": "0000_complex_emma_frost",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1709410869018,
+      "tag": "0001_nervous_skin",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1709411045944,
+      "tag": "0002_next_zzzax",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1709428408095,
+      "tag": "0003_tired_felicia_hardy",
+      "breakpoints": true
+    }
+  ]
+}
