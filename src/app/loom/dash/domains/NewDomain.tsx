@@ -9,12 +9,31 @@ import {
 	DialogTitle,
 	DialogDescription,
 } from "@/components/ui/dialog";
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Globe } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { UploadButton } from "@/lib/uploadthing";
+
+const newDomainValidator = z.object({
+	url: z.string().url(),
+	name: z.string().min(1),
+	photo: z.instanceof(File),
+});
 
 export default function NewDomain() {
+	const form = useForm<z.infer<typeof newDomainValidator>>({
+		resolver: zodResolver(newDomainValidator),
+		defaultValues: {
+			name: "",
+			url: "",
+			photo: new File([], ""),
+		},
+	});
+
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
@@ -41,6 +60,18 @@ export default function NewDomain() {
 						</Label>
 						<Input id="username" defaultValue="@peduarte" className="col-span-3" />
 					</div>
+					<UploadButton
+						endpoint="imageUploader"
+						onClientUploadComplete={(res) => {
+							// Do something with the response
+							console.log("Files: ", res);
+							alert("Upload Completed");
+						}}
+						onUploadError={(error: Error) => {
+							// Do something with the error.
+							alert(`ERROR! ${error.message}`);
+						}}
+					/>
 				</div>
 				<DialogFooter>
 					<Button type="submit">Save changes</Button>

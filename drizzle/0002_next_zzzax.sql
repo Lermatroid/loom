@@ -1,1 +1,0 @@
-ALTER TABLE "user" ALTER COLUMN "github_id" SET DATA TYPE varchar;
