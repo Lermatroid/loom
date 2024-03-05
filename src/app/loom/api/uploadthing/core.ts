@@ -1,9 +1,13 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
+import { validateRequest } from "@/auth";
 
 const f = createUploadthing();
 
-const auth = (req: Request) => ({ id: "fakeId" }); // Fake auth function
+const auth = async (req: Request) => {
+	const { user } = await validateRequest();
+	return user;
+}; // Fake auth function
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
@@ -27,7 +31,7 @@ export const ourFileRouter = {
 			console.log("file url", file.url);
 
 			// !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-			return { uploadedBy: metadata.userId };
+			return { uploadedBy: metadata.userId, fileUrl: file.url };
 		}),
 } satisfies FileRouter;
 

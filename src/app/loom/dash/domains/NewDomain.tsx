@@ -16,7 +16,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UploadButton } from "@/lib/uploadthing";
+import { UploadButton, UploadDropzone } from "@/lib/uploadthing";
+import {
+	Form,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormControl,
+	FormDescription,
+	FormMessage,
+} from "@/components/ui/form";
 
 const newDomainValidator = z.object({
 	url: z.string().url(),
@@ -47,34 +56,59 @@ export default function NewDomain() {
 					<DialogTitle>New Domain</DialogTitle>
 					<DialogDescription>Add a new custom domain to your loom</DialogDescription>
 				</DialogHeader>
-				<div className="grid gap-4 py-4">
-					<div className="grid grid-cols-4 items-center gap-4">
-						<Label htmlFor="name" className="text-right">
-							URL
-						</Label>
-						<Input id="url" defaultValue="Pedro Duarte" className="col-span-3" />
+				<Form {...form}>
+					<div className="grid gap-4 py-4">
+						<FormField
+							control={form.control}
+							name="url"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Domain</FormLabel>
+									<FormControl>
+										<Input {...field} />
+									</FormControl>
+									<FormDescription>This will be the domain for your short links.</FormDescription>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="name"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Name</FormLabel>
+									<FormControl>
+										<Input {...field} />
+									</FormControl>
+									<FormDescription>A short, concise name for this domain.</FormDescription>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<div>
+							<Label>Domain Icon</Label>
+							<UploadDropzone
+								className="ut-button:bg-primary ut-label:text-foreground"
+								endpoint="imageUploader"
+								onClientUploadComplete={(res) => {
+									// Do something with the response
+									console.log("Files: ", res);
+									alert("Upload Completed");
+								}}
+								onUploadError={(error: Error) => {
+									alert(`ERROR! ${error.message}`);
+								}}
+								onUploadBegin={(name) => {
+									// Do something once upload begins
+									console.log("Uploading: ", name);
+								}}
+							/>
+						</div>
 					</div>
-					<div className="grid grid-cols-4 items-center gap-4">
-						<Label htmlFor="username" className="text-right">
-							Username
-						</Label>
-						<Input id="username" defaultValue="@peduarte" className="col-span-3" />
-					</div>
-					<UploadButton
-						endpoint="imageUploader"
-						onClientUploadComplete={(res) => {
-							// Do something with the response
-							console.log("Files: ", res);
-							alert("Upload Completed");
-						}}
-						onUploadError={(error: Error) => {
-							// Do something with the error.
-							alert(`ERROR! ${error.message}`);
-						}}
-					/>
-				</div>
+				</Form>
 				<DialogFooter>
-					<Button type="submit">Save changes</Button>
+					<Button type="submit">Add Domain</Button>
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

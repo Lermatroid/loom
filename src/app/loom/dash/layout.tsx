@@ -1,4 +1,4 @@
-import SideBarItem from "./SideBarItem";
+import { SideBarItem, ToggleThemeButton } from "./SideBarClientItems";
 import Link from "next/link";
 
 import { Link as LinkIcon, Home as HomeIcon, Settings as SettingsIcon } from "lucide-react";
@@ -13,10 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 							{/* <Package2Icon className="h-6 w-6" /> */}
 							<span className="">Loom</span>
 						</Link>
-						{/* <Button className="ml-auto h-8 w-8" size="icon" variant="outline">
-							<BellIcon className="h-4 w-4" />
-							<span className="sr-only">Toggle notifications</span>
-						</Button> */}
+						<ToggleThemeButton />
 					</div>
 					<div className="flex-1 overflow-auto py-2">
 						<nav className="grid items-start px-4 text-sm font-medium">
