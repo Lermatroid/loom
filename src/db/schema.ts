@@ -23,13 +23,13 @@ export const userTable = pgTable("user", {
 
 export const domains = pgTable("domains", {
 	id: varchar("id").primaryKey(),
-	domain: text("domain").unique(),
+	domain: text("domain").unique().notNull(),
 	name: varchar("name").notNull(),
 	icon: varchar("icon").notNull(),
 });
 
 export const domainRelations = relations(domains, ({ many }) => ({
-	posts: many(links),
+	links: many(links),
 }));
 
 export const links = pgTable(

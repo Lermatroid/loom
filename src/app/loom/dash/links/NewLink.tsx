@@ -11,12 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Globe } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { UploadButton, UploadDropzone } from "@/lib/uploadthing";
 import {
 	Form,
 	FormField,
@@ -26,73 +20,15 @@ import {
 	FormDescription,
 	FormMessage,
 } from "@/components/ui/form";
-import { useState } from "react";
-import Image from "next/image";
-import { useAction } from "next-safe-action/hooks";
-import { newDomain } from "@/actions/domains";
-import { urlWithoutProtocolValidator } from "@/lib/validators";
+import { Link as LinkIcon } from "lucide-react";
 
-const newDomainValidator = z.object({
-	url: urlWithoutProtocolValidator,
-	name: z.string().min(1),
-});
-
-export default function NewDomain() {
-	const form = useForm<z.infer<typeof newDomainValidator>>({
-		resolver: zodResolver(newDomainValidator),
-		defaultValues: {
-			name: "",
-			url: "",
-		},
-	});
-
-	const [photoURL, setPhotoURL] = useState<string | null>(null);
-
-	const { execute } = useAction(newDomain, {
-		async onSuccess({ success }) {
-			if (success) {
-				// form.reset();
-				// setPhotoURL(null);
-				alert("Domain added successfully!");
-			}
-		},
-		async onError(error) {
-			console.log(`Error adding domain:`, error);
-		},
-		async onExecute() {
-			console.log("Executing...");
-		},
-		onSettled() {
-			console.log("Settled...");
-		},
-	});
-
-	async function onSubmit(values: z.infer<typeof newDomainValidator>) {
-		console.log("running submit");
-
-		const urlValidator = z.string().url();
-		const validatedPhotoURL = urlValidator.safeParse(photoURL);
-
-		if (validatedPhotoURL.success === false) {
-			alert("Please upload a domain icon!");
-			return;
-		}
-
-		execute({
-			domain: values.url,
-			name: values.name,
-			photo: validatedPhotoURL.data,
-		});
-
-		return;
-	}
-
+export default function NewLink() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
 				<Button className="ml-auto justify-self-end flex items-center gap-x-1" size={"sm"}>
-					<Globe size={16} />
-					New Domain
+					<LinkIcon size={16} />
+					New Link
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">
@@ -100,7 +36,7 @@ export default function NewDomain() {
 					<DialogTitle>New Domain</DialogTitle>
 					<DialogDescription>Add a new custom domain to your Loom</DialogDescription>
 				</DialogHeader>
-				<Form {...form}>
+				{/* <Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)}>
 						<div className="grid gap-4 py-4">
 							<FormField
@@ -174,7 +110,7 @@ export default function NewDomain() {
 							<Button type="submit">Add Domain</Button>
 						</DialogFooter>
 					</form>
-				</Form>
+				</Form> */}
 			</DialogContent>
 		</Dialog>
 	);

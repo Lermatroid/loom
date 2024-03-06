@@ -8,10 +8,12 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import DomainItem from "./DomainItem";
-import { Globe } from "lucide-react";
 import NewDomain from "./NewDomain";
+import { db } from "@/db";
 
-export default function Page() {
+export default async function Page() {
+	const domains = await db.query.domains.findMany();
+
 	return (
 		<div className="mx-20 mt-20">
 			<div className="pb-20 flex items-start w-full">
@@ -19,10 +21,18 @@ export default function Page() {
 				<NewDomain />
 			</div>
 			<div className="grid xl:grid-cols-2 grid-cols-1 gap-4">
-				<DomainItem />
-				<DomainItem />
-				<DomainItem />
-				<DomainItem />
+				{domains.map((d) => {
+					return (
+						<DomainItem
+							key={d.id}
+							name={d.name}
+							domain={d.domain}
+							icon={d.icon}
+							linkCount={0}
+							href={d.domain}
+						/>
+					);
+				})}
 			</div>
 		</div>
 	);

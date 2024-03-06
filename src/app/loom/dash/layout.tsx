@@ -1,12 +1,12 @@
 import { SideBarItem, ToggleThemeButton } from "./SideBarClientItems";
 import Link from "next/link";
 
-import { Link as LinkIcon, Home as HomeIcon, Settings as SettingsIcon } from "lucide-react";
+import { Globe, Link as LinkIcon, Home as HomeIcon, Settings as SettingsIcon } from "lucide-react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr] font-general-sans">
-			<div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">
+			<div className="hidden border-r bg-card lg:block dark:bg-card">
 				<div className="flex h-full max-h-screen flex-col gap-2">
 					<div className="flex h-[60px] items-center px-6">
 						<Link className="flex items-center gap-2 font-semibold" href="#">
@@ -21,8 +21,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 								<HomeIcon className="h-4 w-4" />
 								Home
 							</SideBarItem>
-							<SideBarItem path="/domains">
+							<SideBarItem path="/links">
 								<LinkIcon className="h-4 w-4" />
+								Links
+							</SideBarItem>
+							<SideBarItem path="/domains">
+								<Globe className="h-4 w-4" />
 								Domains
 							</SideBarItem>
 							<SideBarItem path="/settings">
