@@ -35,6 +35,7 @@ export const domainRelations = relations(domains, ({ many }) => ({
 export const links = pgTable(
 	"link",
 	{
+		shortID: varchar("shortID").notNull().unique(),
 		to: varchar("to").notNull(),
 		slug: varchar("slug").notNull(),
 		domain: text("domain").notNull(),
