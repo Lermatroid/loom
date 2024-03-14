@@ -124,7 +124,7 @@ export default function NewLink({ domainOptions }: NewLinkProps) {
 										<Select onValueChange={field.onChange} defaultValue={field.value}>
 											<FormControl>
 												<SelectTrigger>
-													<SelectValue placeholder="Select a verified email to display" />
+													<SelectValue placeholder="Select a Domain" />
 												</SelectTrigger>
 											</FormControl>
 											<SelectContent>

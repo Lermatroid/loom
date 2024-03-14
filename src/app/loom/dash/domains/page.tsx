@@ -15,7 +15,7 @@ export default async function Page() {
 	const domains = await db.query.domains.findMany();
 
 	return (
-		<div className="mx-20 mt-20">
+		<div className="mt-20 w-full">
 			<div className="pb-20 flex items-start w-full">
 				<h1 className="font-semibold text-4xl font-general-sans">Domains</h1>
 				<NewDomain />

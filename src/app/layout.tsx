@@ -10,6 +10,8 @@ const generalSans = localFont({
 	variable: "--font-general-sans",
 });
 
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
 export default function RootLayout({
 	children,
 }: Readonly<{
@@ -18,7 +20,7 @@ export default function RootLayout({
 	const theme = cookies().get("loom_theme")?.value || "light";
 
 	return (
-		<html lang="en" className={`${generalSans.variable}`}>
+		<html lang="en" className={`${generalSans.variable} ${inter.variable}`}>
 			<body className={theme === "dark" ? "dark" : ""}>{children}</body>
 		</html>
 	);
