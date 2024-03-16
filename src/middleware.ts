@@ -40,7 +40,7 @@ export const config = {
 	matcher: [
 		{
 			// Matches any route that does not start with /_next/static or /_next/image or is the favicon
-			source: "/((?!_next/static|_next/image|favicon.ico).*)",
+			source: "/((?!_next/static|_next/image|loom/img|favicon.ico).*)",
 		},
 	],
 };
