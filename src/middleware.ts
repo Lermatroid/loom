@@ -10,7 +10,11 @@ export async function middleware(request: NextRequest) {
 	// Get the origin and path from the request URL
 	const url = new URL(request.url);
 	const origin = url.origin.replace("http://", "").replace("https://", "");
-	const path = url.pathname;
+	let path = url.pathname;
+
+	if (path.startsWith("/")) {
+		path = path.substring(1);
+	}
 
 	// Check if should be sending user to the admin panel
 	if (isCoreURL(origin) && (path === "/loom" || path.startsWith("/loom/"))) {
