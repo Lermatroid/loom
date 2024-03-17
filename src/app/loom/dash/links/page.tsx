@@ -7,8 +7,13 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import LinkPageOptions from "./LinkPageOptions";
+import { redirect } from "next/navigation";
 
-export default async function Page() {
+export default async function Page({
+	searchParams,
+}: {
+	searchParams?: { [key: string]: string | string[] | undefined };
+}) {
 	const { user } = await validateRequest();
 	const domains = await db.query.domains.findMany();
 	const links = await db.query.links.findMany();
@@ -22,6 +27,9 @@ export default async function Page() {
 			<div className="w-full grid grid-cols-[300px_1fr] gap-x-4 min-h-[60vh]">
 				<LinkPageOptions />
 				<div className="w-full h-full">
+					{/* Sort is: {searchParams?.sort}
+					<br />
+					Query is: {searchParams?.q} */}
 					<div className="grid grid-cols-1 gap-y-2">
 						{links.map((link) => (
 							<LinkItem

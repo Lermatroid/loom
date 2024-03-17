@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
 	}
 
 	// Check if should be sending user to the admin panel
-	if (isCoreURL(origin) && (path === "/loom" || path.startsWith("/loom/"))) {
+	if (isCoreURL(origin) && (path === "loom" || path.startsWith("loom/"))) {
 		return NextResponse.next();
 	}
 

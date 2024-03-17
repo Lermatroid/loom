@@ -17,6 +17,7 @@ export const env = createEnv({
 			})
 			.transform((v) => `https://${v}`)
 			.pipe(z.string().url()),
+		DO_MIDDLEWARE_LOGGING: z.enum(["TRUE", "FALSE"]).optional(),
 	},
 	client: {
 		// NEXT_PUBLIC_PUBLISHABLE_KEY: z.string().min(1),
