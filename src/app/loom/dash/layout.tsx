@@ -10,7 +10,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 			<div className="bg-primary text-primary-foreground">
 				<div className="grid grid-cols-4 min-h-24 max-w-5xl mx-auto">
 					<div className="flex items-center">
-						<p className="font-bold text-xl">Loom</p>
+						<Link href={"/loom/dash"}>
+							<p className="font-bold text-xl">Loom</p>
+						</Link>
 					</div>
 					<div className="col-span-2 flex items-center justify-center w-full">
 						<div className="h-10 border-zinc-700 border-[1px] rounded-lg w-full grid grid-flow-col justify-stretch p-1 gap-1 max-w-[400px]">
